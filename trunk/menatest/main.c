@@ -73,7 +73,7 @@ int main(int argc, char **argv) {
 				printf("\n%s is correct", in);
 				if (isclose) {
 					// is this really necessary? ;)
-					printf(", however %s is more accurate.", ans);
+					printf(", however %s is more accurate.\n", ans);
 				} else {
 					printf("!\n");
 				}
