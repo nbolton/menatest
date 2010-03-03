@@ -6,7 +6,7 @@
 void pause(void) {
 
 	// HACK: so screen doesn't disappear when finished debugging :)
-	system("pause");
+	//system("pause");
 }
 
 int main(int argc, char **argv) {
