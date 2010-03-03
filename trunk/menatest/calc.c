@@ -303,6 +303,7 @@ int calcans(const char *eq, char *ans, uint *isfloat) {
 			// `char *` (pointer to char) is usually 4 bytes
 			tokarr = realloc(tokarr, (tokc + 1) * sizeof(char *));
 			if (!tokarr) {
+				freearr(&tokarr, tokc);
 				printf("error: realloc fail\n");
 				return 1;
 			}
