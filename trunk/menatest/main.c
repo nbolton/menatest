@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define VERSION "1.0.2"
+#define VERSION "1.0.3"
 
 void pause(void) {
 
@@ -13,7 +13,7 @@ void pause(void) {
 
 int main(int argc, char **argv) {
 
-	int exit = 0, askedn = 0, validn = 0, i = 0, c;
+	int exit = 0, askedn = 0, validn = 0, i = 0;
 
 	atexit(pause);
 
