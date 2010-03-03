@@ -79,7 +79,7 @@ const char *strfloat(const char *c) {
 	return strchr(c, '.');
 }
 
-int calcans(const char *eq, const char *in, char *ans, uint *isfloat) {
+int calcans(const char *eq, char *ans, uint *isfloat) {
 	
 	const uint ftoct = 4; // final toc target is 3 (t x = n)
 	uint tokc = 0, i = 0, j, ftokc;
