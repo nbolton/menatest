@@ -32,7 +32,7 @@ int main(int argc, char **argv) {
 		float fans;
 
 		geneq(eq, 2);
-		printf("New question!\n\n%s\n\n", eq);
+		printf("New question!\n\n  %s\n\n", eq);
 
 		printf("Value of x to 2 dp? ");
 		scanf("%s", in);
@@ -82,7 +82,7 @@ int main(int argc, char **argv) {
 			}
 			
 			rate = ((float)validn / (float)askedn) * 100.0;
-			printf("Accuracy so far: %.2f%\n", rate);
+			printf("Accuracy so far: %.2f%%\n", rate);
 		}
 
 		printf("\n====================\n\n");
