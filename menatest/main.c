@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define VERSION "1.0.1"
+
 void pause(void) {
 
 	// HACK: so screen doesn't disappear when finished debugging :)
@@ -15,7 +17,7 @@ int main(int argc, char **argv) {
 	atexit(pause);
 
 	printf(
-		"Mental Arithmetic Tester in C\n\n"
+		"Mental Arithmetic Tester in C " VERSION "\n\n"
 		"Tips:\n"
 		"- A calculator might be helpful.\n"
 		"- Remember operator precedence and truncation.\n"
@@ -41,6 +43,7 @@ int main(int argc, char **argv) {
 
 		printf("\n--------------------\n");
 		if (ret = calcans(eq, in, ans, &isfloat) != 0) {
+
 			printf("error: checkans fail: %i\n", ret);
 			printf("\nHmm, couldn't figure that one out.\n");
 
