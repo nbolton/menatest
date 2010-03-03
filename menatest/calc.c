@@ -73,8 +73,7 @@ void freearr(char ***arr, uint len) {
 	free(*arr);
 }
 
-// returns pointer to char if . found
-// returns null if not null
+// returns pointer to char if . found, otherwise null
 const char *strfloat(const char *c) {
 
 	return strchr(c, '.');
