@@ -12,7 +12,8 @@ void pause(void) {
 }
 
 int main(int argc, char **argv) {
-	int exit = 0, askedn = 0, validn = 0, i = 0;
+
+	int exit = 0, askedn = 0, validn = 0, i = 0, c;
 
 	atexit(pause);
 
@@ -42,10 +43,14 @@ int main(int argc, char **argv) {
 		askedn++;
 
 		printf("\n--------------------\n");
-		if (ret = calcans(eq, ans, &isfloat) != 0) {
+		ret = calcans(eq, ans, &isfloat);
 
-			printf("error: checkans fail: %i\n", ret);
-			printf("\nHmm, couldn't figure that one out.\n");
+		if (ret != 0) {
+
+			printf(
+				"error: calcans fail: %i\n\n"
+				"Hmm, couldn't figure that one out.\n"
+				"Maybe you could report a bug? :)\n\n", ret);
 
 		} else {
 
@@ -85,8 +90,13 @@ int main(int argc, char **argv) {
 			}
 			
 			rate = ((float)validn / (float)askedn) * 100.0;
-			printf("Accuracy so far: %.2f%%\n", rate);
+			printf("Accuracy so far: %.2f%%\n\n", rate);
 		}
+
+		// TODO: use something other than pause
+		// this is a nasty little hack to replace getchar/getch as they 
+		// arent working correctly :(
+		system("pause");
 
 		printf("\n====================\n\n");
 	}

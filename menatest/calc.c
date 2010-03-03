@@ -86,7 +86,7 @@ int calcans(const char *eq, char *ans, uint *isfloat) {
 	char **tokarr = 0;
 	char *tok;
 
-	printf("\ncalculating...\n");
+	printf("\ncalculating...\n\n");
 
 	do {
 
@@ -118,8 +118,8 @@ int calcans(const char *eq, char *ans, uint *isfloat) {
 	}
 
 	// print original equation again for comparison
-	printf("\noriginal equation:\n");
-	for (i = 0; i < tokc; i++) {
+	printf("\noriginal equation:\n ");
+	for (i = 3; i < tokc; i++) {
 		if (strlen(tokarr[i]) != 0) {
 			printf("%s ", tokarr[i]);
 		}
@@ -150,12 +150,12 @@ int calcans(const char *eq, char *ans, uint *isfloat) {
 				if (strlen(tokarr[j]) == 1 && strchr(tokarr[j], op)) {
 					
 					char res[100]; // char result (we don't know how big this will be!)
-					float fres; // float result
-					int ires; // int result
+					float fres = 0; // float result
+					int ires = 0; // int result
 					char *lv, *rv; // left/right operand strings
-					int lfloat, rfloat; // is left/right float?
-					float lfv, rfv; // left/right operand float values
-					int liv, riv; // left/right operand int values
+					int lfloat = 0, rfloat = 0; // is left/right float?
+					float lfv = 0, rfv = 0; // left/right operand float values
+					int liv = 0, riv = 0; // left/right operand int values
 					uint k; // loop counters
 					uint lvidx = j, rvidx = j; // right/left operand indices
 
@@ -223,30 +223,51 @@ int calcans(const char *eq, char *ans, uint *isfloat) {
 							break;
 
 						case '/':
-							if (riv == 0) {
-								freearr(&tokarr, tokc);
-								printf("error: divide by zero? you must be mad!\n");
-								return 1;
-							}
-
 							if (lfloat && rfloat) {
+								if (rfv == 0) {
+									freearr(&tokarr, tokc);
+									printf("error: divide by zero\n");
+									return 1;
+								}
 								fres = lfv / rfv; // float = float / float
 							}
 							else if (lfloat && !rfloat) {
+								if (riv == 0) {
+									freearr(&tokarr, tokc);
+									printf("error: divide by zero\n");
+									return 1;
+								}
 								fres = lfv / riv; // float = float / int
 							}
 							else if (!lfloat && rfloat) {
+								if (rfv == 0) {
+									freearr(&tokarr, tokc);
+									printf("error: divide by zero\n");
+									return 1;
+								}
 								fres = liv / rfv; // float = int / float
 							}
 							else {
+								if (riv == 0) {
+									freearr(&tokarr, tokc);
+									printf("error: divide by zero\n");
+									return 1;
+								}
 								ires = liv / riv; // int = int / int
 							}
 							break;
 
 						case '%':
+
 							if (!lfloat && !rfloat) {
+								if (riv == 0) {
+									freearr(&tokarr, tokc);
+									printf("error: divide by zero? oh dear!\n");
+									return 1;
+								}
 								ires = liv % riv; // int = int % int
-							} else {
+							} 
+							else {
 								freearr(&tokarr, tokc);
 								printf("error: operands of modulo (%%) must be int\n");
 								return 1;
@@ -306,8 +327,8 @@ int calcans(const char *eq, char *ans, uint *isfloat) {
 					ftokc -= 2;
 
 					// after each elimination, print the new equation
-					printf("\nsimplified equation:\n");
-					for (k = 0; k < tokc; k++) {
+					printf("\nsimplified equation:\n ");
+					for (k = 3; k < tokc; k++) {
 						if (strlen(tokarr[k]) != 0) {
 							printf("%s ", tokarr[k]);
 						}
@@ -331,8 +352,8 @@ int calcans(const char *eq, char *ans, uint *isfloat) {
 		sscanf(tokarr[ftoct - 1], "%f", &f);
 		sprintf(tokarr[ftoct - 1], "%i", (int)f);
 
-		printf("\ntruncated answer:\n");
-		for (i = 0; i < tokc; i++) {
+		printf("\ntruncated answer:\n ");
+		for (i = 3; i < tokc; i++) {
 			if (strlen(tokarr[i]) != 0) {
 				printf("%s ", tokarr[i]);
 			}
@@ -349,6 +370,5 @@ int calcans(const char *eq, char *ans, uint *isfloat) {
 	sprintf(ans, tokarr[ftoct - 1]);
 
 	freearr(&tokarr, tokc);
-
 	return 0;
 }
