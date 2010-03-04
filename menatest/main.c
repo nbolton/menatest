@@ -37,11 +37,17 @@ int main(int argc, char **argv) {
 		geneq(eq, 2);
 		printf(
 			"New question!\n\n"
-			"If it's invalid, type: i\n\n"
+			"- If invalid, type: i\n"
+			"- To skip, type: s\n\n"
 			"  %s\n\n", eq);
 
 		printf("Value of x to 2 dp? ");
 		scanf("%s", in);
+
+		if (strchr(in, 's')) {
+			printf("\nSkipping...\n\n");
+			continue;
+		}
 
 		askedn++;
 
