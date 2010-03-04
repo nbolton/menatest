@@ -35,7 +35,10 @@ int main(int argc, char **argv) {
 		float fans;
 
 		geneq(eq, 2);
-		printf("New question!\n\n  %s\n\n", eq);
+		printf(
+			"New question!\n\n"
+			"If it's invalid, type: i\n\n"
+			"  %s\n\n", eq);
 
 		printf("Value of x to 2 dp? ");
 		scanf("%s", in);
@@ -47,10 +50,14 @@ int main(int argc, char **argv) {
 
 		if (ret != 0) {
 
-			printf(
-				"error: calcans fail: %i\n\n"
-				"Hmm, couldn't figure that one out.\n"
-				"Maybe you could report a bug? :)\n\n", ret);
+			printf("error: calcans fail: %i\n\n", ret);
+
+			if (strchr(in, 'i')) {
+				validn++;
+				printf("Correct, this equation is invalid!\n");
+			} else {
+				printf("Sorry, you typed %s but this equation is invalid.\n", in);
+			}
 
 		} else {
 
@@ -78,20 +85,14 @@ int main(int argc, char **argv) {
 			printf("\n--------------------\n");
 			if (isvalid || isclose) {
 				validn++;
-				printf("\n%s is correct", in);
-				if (isclose) {
-					// is this really necessary? ;)
-					printf(", however %s is more accurate.\n", ans);
-				} else {
-					printf("!\n");
-				}
+				printf("\n%s is correct!\n", in);
 			} else {
 				printf("\nSorry, %s is wrong. The answer is actually %s\n", in, ans);
 			}
-			
-			rate = ((float)validn / (float)askedn) * 100.0;
-			printf("Accuracy so far: %.2f%%\n\n", rate);
 		}
+			
+		rate = ((float)validn / (float)askedn) * 100.0;
+		printf("Accuracy so far: %.2f%%\n\n", rate);
 
 		// TODO: use something other than pause
 		// this is a nasty little hack to replace getchar/getch as they 
